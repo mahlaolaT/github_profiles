@@ -11,8 +11,12 @@ class GithubSearchCubit extends Cubit<GithubSearchState> {
   Future<void> searchUsers(String query) async {
     emit(GithubSearchLoading());
     try {
-      final response = await service.searchUsers(query);
-      emit(GithubSearchLoaded(response.items));
+      if(query.isNotEmpty) {
+        final response = await service.searchUsers(query);
+        emit(GithubSearchLoaded(response.items));
+      }else{
+        emit(GithubSearchInitial());
+      }
     } catch (error) {
       emit(GithubSearchError(error.toString()));
     }

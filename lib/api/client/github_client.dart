@@ -11,8 +11,8 @@ abstract class GithubClient{
 
   factory GithubClient(Dio dio,{String? baseUrl }) = _GithubClient;
 
-  @GET('/search/users?q={query}')
-  Future<GithubSearch> searchUser(@Query('query') String? query);
+  @GET('/search/users')
+  Future<GithubSearch> searchUser(@Query('q') String? query);
 
   @GET('/users/{username}')
   Future<GithubUserDetails> userDetails(@Path('username') String? username);

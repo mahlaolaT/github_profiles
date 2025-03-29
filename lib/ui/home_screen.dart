@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:github_profiles/cubit/github_search_cubit.dart';
+import 'package:github_profiles/state/github_search_state.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -8,7 +11,30 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: const UserSearchField(),
-        body: Container(),
+        body: BlocBuilder<GithubSearchCubit, GithubSearchState>(
+          builder: (context, state) {
+            if (state is GithubSearchLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is GithubSearchLoaded) {
+              return ListView.builder(
+                shrinkWrap: true,
+                itemCount: state.users.length,
+                itemBuilder: (context, index) {
+                  final user = state.users[index];
+                  return ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(user.avatarUrl),
+                    ),
+                    title: Text(user.login),
+                  );
+                },
+              );
+            } else if (state is GithubSearchError) {
+              return Center(child: Text('Error: ${state.message}'));
+            }
+            return const Center(child: Text('Enter a search term'));
+          },
+        ),
       ),
     );
   }
@@ -20,19 +46,19 @@ class UserSearchField extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(16.0),
       child: TextFormField(
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: 'Search',
-          border: const OutlineInputBorder(
+          contentPadding: EdgeInsets.only(left: 16.0),
+          border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(12.0)),
           ),
-          suffixIcon: IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
+          suffixIcon: Icon(Icons.search),
         ),
-        onChanged: (query) {},
+        onChanged: (query) {
+          context.read<GithubSearchCubit>().searchUsers(query);
+        },
       ),
     );
   }
