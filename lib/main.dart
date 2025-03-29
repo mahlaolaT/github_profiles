@@ -19,6 +19,7 @@ class GithubExplorerApp extends StatelessWidget {
       ),
       initialRoute: homeRoute,
       onGenerateRoute: generateRoute,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
