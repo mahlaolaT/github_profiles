@@ -1,4 +1,4 @@
-class GithubUserDetailsResponse {
+class GithubUserDetails {
   final String login;
   final int id;
   final String nodeId;
@@ -33,7 +33,7 @@ class GithubUserDetailsResponse {
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  GithubUserDetailsResponse({
+  GithubUserDetails({
     required this.login,
     required this.id,
     required this.nodeId,
@@ -69,8 +69,8 @@ class GithubUserDetailsResponse {
     required this.updatedAt,
   });
 
-  factory GithubUserDetailsResponse.fromJson(Map<String, dynamic> json) {
-    return GithubUserDetailsResponse(
+  factory GithubUserDetails.fromJson(Map<String, dynamic> json) {
+    return GithubUserDetails(
       login: json['login'] as String,
       id: json['id'] as int,
       nodeId: json['node_id'] as String,

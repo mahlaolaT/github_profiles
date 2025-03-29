@@ -1,8 +1,8 @@
-import '../model/github_user.dart';
-import '../model/license.dart';
-import '../model/permissions.dart';
+import 'github_user.dart';
+import 'license.dart';
+import 'permissions.dart';
 
-class GitHubRepositoryResponse {
+class GitHubRepository {
   final int id;
   final String nodeId;
   final String name;
@@ -84,7 +84,7 @@ class GitHubRepositoryResponse {
   final String defaultBranch;
   final Permissions permissions;
 
-  GitHubRepositoryResponse({
+  GitHubRepository({
     required this.id,
     required this.nodeId,
     required this.name,
@@ -167,8 +167,8 @@ class GitHubRepositoryResponse {
     required this.permissions,
   });
 
-  factory GitHubRepositoryResponse.fromJson(Map<String, dynamic> json) {
-    return GitHubRepositoryResponse(
+  factory GitHubRepository.fromJson(Map<String, dynamic> json) {
+    return GitHubRepository(
       id: json['id'],
       nodeId: json['node_id'],
       name: json['name'],

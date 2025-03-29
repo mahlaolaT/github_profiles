@@ -1,4 +1,4 @@
-import 'package:github_profiles/api/response/github_repo_response.dart';
+import 'package:github_profiles/api/model/github_repo.dart';
 
 /// States for GitHub user repositories.
 abstract class GithubUserReposState {}
@@ -8,8 +8,8 @@ class GithubUserReposInitial extends GithubUserReposState {}
 class GithubUserReposLoading extends GithubUserReposState {}
 
 class GithubUserReposLoaded extends GithubUserReposState {
-  final GitHubRepositoryResponse response;
-  GithubUserReposLoaded(this.response);
+  final List<GitHubRepository> repositories;
+  GithubUserReposLoaded(this.repositories);
 }
 
 class GithubUserReposError extends GithubUserReposState {

@@ -12,7 +12,7 @@ class GithubSearchCubit extends Cubit<GithubSearchState> {
     emit(GithubSearchLoading());
     try {
       final response = await service.searchUsers(query);
-      emit(GithubSearchLoaded(response));
+      emit(GithubSearchLoaded(response.items));
     } catch (error) {
       emit(GithubSearchError(error.toString()));
     }

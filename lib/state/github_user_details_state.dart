@@ -1,5 +1,5 @@
 
-import 'package:github_profiles/api/response/github_user_details_response.dart';
+import 'package:github_profiles/api/model/github_user_details.dart';
 
 /// States for GitHub user details.
 abstract class GithubUserDetailsState {}
@@ -9,7 +9,7 @@ class GithubUserDetailsInitial extends GithubUserDetailsState {}
 class GithubUserDetailsLoading extends GithubUserDetailsState {}
 
 class GithubUserDetailsLoaded extends GithubUserDetailsState {
-  final GithubUserDetailsResponse response;
+  final GithubUserDetails response;
   GithubUserDetailsLoaded(this.response);
 }
 

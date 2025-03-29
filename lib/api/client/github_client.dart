@@ -1,6 +1,6 @@
-import 'package:github_profiles/api/response/github_repo_response.dart';
-import 'package:github_profiles/api/response/github_search_response.dart';
-import 'package:github_profiles/api/response/github_user_details_response.dart';
+import 'package:github_profiles/api/model/github_repo.dart';
+import 'package:github_profiles/api/model/github_search.dart';
+import 'package:github_profiles/api/model/github_user_details.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 
@@ -12,12 +12,12 @@ abstract class GithubClient{
   factory GithubClient(Dio dio,{String? baseUrl }) = _GithubClient;
 
   @GET('/search/users?q={query}')
-  Future<GithubSearchResponse> searchUser(@Query('query') String? query);
+  Future<GithubSearch> searchUser(@Query('query') String? query);
 
   @GET('/users/{username}')
-  Future<GithubUserDetailsResponse> userDetails(@Path('username') String? username);
+  Future<GithubUserDetails> userDetails(@Path('username') String? username);
 
   @GET('/users/{username}/repos')
-  Future<GitHubRepositoryResponse> userRepos(@Path('username') String? username);
+  Future<List<GitHubRepository>> userRepos(@Path('username') String? username);
 
 }

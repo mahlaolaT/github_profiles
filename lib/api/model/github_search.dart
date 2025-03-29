@@ -1,18 +1,18 @@
-import '../model/github_user.dart';
+import 'github_user.dart';
 
-class GithubSearchResponse {
+class GithubSearch {
   final int totalCount;
   final bool incompleteResults;
   final List<GithubUser> items;
 
-  GithubSearchResponse({
+  GithubSearch({
     required this.totalCount,
     required this.incompleteResults,
     required this.items,
   });
 
-  factory GithubSearchResponse.fromJson(Map<String, dynamic> json) {
-    return GithubSearchResponse(
+  factory GithubSearch.fromJson(Map<String, dynamic> json) {
+    return GithubSearch(
       totalCount: json['total_count'] as int,
       incompleteResults: json['incomplete_results'] as bool,
       items: (json['items'] as List<dynamic>)
