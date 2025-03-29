@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:github_profiles/ui/account_details_screen.dart';
-import 'package:github_profiles/ui/home_screen.dart';
+import 'package:github_profiles/router.dart';
 
 void main() {
   runApp(const GithubExplorerApp());
@@ -18,27 +17,8 @@ class GithubExplorerApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: '/',
-      onGenerateRoute: (settings) {
-        switch (settings.name) {
-          case '/':
-            return MaterialPageRoute(
-              builder: (_) => const HomeScreen(),
-            );
-          case '/second':
-            return MaterialPageRoute(
-              builder: (_) => const AccountDetailsScreen(),
-            );
-          default:
-            return MaterialPageRoute(
-              builder: (_) => Scaffold(
-                body: Center(
-                  child: Text('Ops! route unknown ${settings.name}'),
-                ),
-              ),
-            );
-        }
-      },
+      initialRoute: homeRoute,
+      onGenerateRoute: generateRoute,
     );
   }
 }
