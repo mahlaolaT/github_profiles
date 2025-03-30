@@ -23,6 +23,16 @@ class RepoListItem extends StatelessWidget {
             repository.name,
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
+          Visibility(
+            visible: repository.language?.isNotEmpty ?? false,
+            child: Text(
+              '${repository.language}',
+              style: const TextStyle(
+                fontSize: 14.0,
+                fontWeight: FontWeight.w200,
+              ),
+            ),
+          ),
           Container(
             padding: const EdgeInsets.all(8.0).copyWith(left: 0),
             child: Row(
@@ -78,10 +88,11 @@ class RepoListItem extends StatelessWidget {
             ),
           ),
           Container(
-            padding: const EdgeInsets.all(8.0).copyWith(left: 0,bottom: 0),
+            padding: const EdgeInsets.all(8.0).copyWith(left: 0, bottom: 0),
             child: Text(
               'Created: ${DateFormat('MMM d, yyyy').format(repository.createdAt)}',
-              style: const TextStyle(fontSize: 10.0, fontWeight: FontWeight.w300),
+              style:
+                  const TextStyle(fontSize: 10.0, fontWeight: FontWeight.w300),
             ),
           ),
         ],
