@@ -64,7 +64,7 @@ class GithubUser {
       type: json['type'] as String,
       userViewType: json['user_view_type'] as String,
       siteAdmin: json['site_admin'] as bool,
-      score: (json['score'] as num).toDouble(),
+      score: (json['score'] != null ) ? (json['score'] as num).toDouble() : 0.0,
     );
   }
 

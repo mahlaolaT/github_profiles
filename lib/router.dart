@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:github_profiles/ui/home_screen.dart';
-import 'package:github_profiles/ui/account_details_screen.dart';
+import 'package:github_profiles/ui/screens/account_details_screen.dart';
+import 'package:github_profiles/ui/screens/home_screen.dart';
 
 const homeRoute = '/';
 const accountDetailsRoute = '/accountDetails';
