@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_profiles/cubit/github_search_cubit.dart';
+import 'package:github_profiles/cubit/github_user_details_cubit.dart';
+import 'package:github_profiles/router.dart';
 import 'package:github_profiles/state/github_search_state.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +29,12 @@ class HomeScreen extends StatelessWidget {
                       backgroundImage: NetworkImage(user.avatarUrl),
                     ),
                     title: Text(user.login),
+                    subtitle: Text(user.type),
+                    onTap: () {
+                      final userDetailsCubit = context.read<GithubUserDetailsCubit>();
+                      userDetailsCubit.fetchUserDetails(user.login);
+                      Navigator.of(context).pushNamed(accountDetailsRoute);
+                    },
                   );
                 },
               );
