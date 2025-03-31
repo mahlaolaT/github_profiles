@@ -13,6 +13,16 @@ class UserRepository {
     }
   }
 
+  Stream<List<GithubUser>> getLikedUsersStream() async* {
+    if (!Hive.isBoxOpen(boxName)) {
+      await Hive.openBox<GithubUser>(boxName);
+    }
+    final box = Hive.box<GithubUser>(boxName);
+
+    yield box.values.toList();
+    yield* box.watch().map((_) => box.values.toList());
+  }
+
   Future<GithubUser> getLikedUser(GithubUser user) async {
     if ((Hive.isBoxOpen(boxName))) {
       final likedUsers = Hive.box<GithubUser>(boxName).values;
