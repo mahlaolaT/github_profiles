@@ -34,7 +34,7 @@ class UserListItem extends StatelessWidget {
         ),
         onPressed: () async {
           final userRepo = context.read<UserRepository>();
-          userRepo.addLikedUser(user..liked = !user.liked);
+          await userRepo.addLikedUser(user..liked = !user.liked);
         },
       ),
     );
