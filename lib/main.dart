@@ -5,12 +5,9 @@ import 'package:github_profiles/api/client/authorization_interceptor.dart';
 import 'package:github_profiles/cubit/github_search_cubit.dart';
 import 'package:github_profiles/cubit/github_user_details_cubit.dart';
 import 'package:github_profiles/cubit/github_user_repos_cubit.dart';
-import 'package:github_profiles/storage/user_repository.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:github_profiles/router.dart';
 
 import 'api/client/github_client.dart';
-import 'api/model/github_user.dart';
 import 'api/service/github_service.dart';
 
 void main() async {
@@ -33,9 +30,6 @@ class GithubExplorerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        RepositoryProvider(
-          create: (context) => UserRepository(),
-        ),
         BlocProvider(
           create: (context) => GithubSearchCubit(service: service),
         ),
@@ -44,7 +38,7 @@ class GithubExplorerApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => GithubUserReposCubit(service: service),
-        ),
+        )
       ],
       child: MaterialApp(
         title: 'Github Explorer',
