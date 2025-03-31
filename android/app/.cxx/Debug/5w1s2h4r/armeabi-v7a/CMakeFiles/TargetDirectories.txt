@@ -1,0 +1,2 @@
+C:/Users/Ntokozo Ntuli/Desktop/github_profiles/android/app/.cxx/Debug/5w1s2h4r/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/Ntokozo Ntuli/Desktop/github_profiles/android/app/.cxx/Debug/5w1s2h4r/armeabi-v7a/CMakeFiles/rebuild_cache.dir

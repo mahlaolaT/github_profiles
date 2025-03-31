@@ -10,6 +10,7 @@ import 'package:github_profiles/router.dart';
 import 'api/client/github_client.dart';
 import 'api/service/github_service.dart';
 
+
 void main() async {
   const token = '';
   final dio = Dio()..interceptors.add(AuthorizationInterceptor(token: token));
