@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: const UserSearchField(),
+        appBar: UserSearchField(),
         body: BlocBuilder<GithubSearchCubit, GithubSearchState>(
           builder: (context, state) {
             if (state is GithubSearchLoading) {

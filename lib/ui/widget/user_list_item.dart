@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_profiles/api/model/github_user.dart';
 import 'package:github_profiles/cubit/github_user_details_cubit.dart';
 import 'package:github_profiles/cubit/github_user_repos_cubit.dart';
+import 'package:github_profiles/storage/user_repository.dart';
 
 class UserListItem extends StatelessWidget {
   const UserListItem({
@@ -26,6 +27,16 @@ class UserListItem extends StatelessWidget {
         userReposCubit.fetchUserRepos(user.login);
         Navigator.of(context).pushNamed(accountDetailsRoute);
       },
+      trailing: IconButton(
+        icon: Icon(
+          user.liked ? Icons.favorite : Icons.favorite_border,
+          color: user.liked ? Colors.red : Colors.grey,
+        ),
+        onPressed: () async {
+          final userRepo = context.read<UserRepository>();
+          userRepo.addLikedUser(user..liked = !user.liked);
+        },
+      ),
     );
   }
 }
