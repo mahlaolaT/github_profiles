@@ -14,7 +14,7 @@ import 'api/model/github_user.dart';
 import 'api/service/github_service.dart';
 
 void main() async {
-  const token = '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';
+  const token = '';
   final dio = Dio()..interceptors.add(AuthorizationInterceptor(token: token));
 
   WidgetsFlutterBinding.ensureInitialized();
