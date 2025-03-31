@@ -4,7 +4,8 @@ import 'package:github_profiles/api/service/github_service.dart';
 import 'package:github_profiles/main.dart';
 import 'package:mockito/annotations.dart';
 
-import 'widget_test.mocks.dart';
+import 'app_test.mocks.dart';
+
 
 @GenerateMocks([GithubService])
 void main() {

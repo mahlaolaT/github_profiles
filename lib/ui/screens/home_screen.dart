@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:github_profiles/cubit/github_search_cubit.dart';
 import 'package:github_profiles/state/github_search_state.dart';
 import 'package:github_profiles/ui/widget/loading_indicator.dart';
-import 'package:github_profiles/ui/widget/user_serch_field.dart';
+import 'package:github_profiles/ui/widget/user_search_delegate.dart';
 import 'package:github_profiles/ui/widget/users_list_view.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -13,7 +13,16 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: UserSearchField(),
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {
+                showSearch(context: context, delegate: UserSearchDelegate());
+              },
+            )
+          ],
+        ),
         body: BlocBuilder<GithubSearchCubit, GithubSearchState>(
           builder: (context, state) {
             if (state is GithubSearchLoading) {
@@ -28,5 +37,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-
