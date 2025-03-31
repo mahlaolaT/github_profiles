@@ -36,8 +36,7 @@ class UserSearchDelegate extends SearchDelegate<String> {
   Widget buildResults(BuildContext context) {
     _saveToRecentSearches(context.read<RecentSearchRepository>());
     return BlocBuilder<GithubSearchCubit, GithubSearchState>(
-      bloc: context.read<GithubSearchCubit>()
-        ..searchUsers(query),
+      bloc: context.read<GithubSearchCubit>()..searchUsers(query),
       builder: (context, state) {
         if (state is GithubSearchLoading) {
           return const LoadingIndicator();

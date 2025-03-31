@@ -6,10 +6,13 @@ class UserRepository {
 
   Future<List<GithubUser>> getLikedUsers() async {
     if ((Hive.isBoxOpen(boxName))) {
-      return Hive.box<GithubUser>(boxName).values.toList();
+      return Hive.box<GithubUser>(boxName)
+          .values
+          .where((user) => user.liked)
+          .toList();
     } else {
       final box = await Hive.openBox<GithubUser>(boxName);
-      return box.values.toList();
+      return box.values.where((user) => user.liked).toList();
     }
   }
 
@@ -19,8 +22,10 @@ class UserRepository {
     }
     final box = Hive.box<GithubUser>(boxName);
 
-    yield box.values.toList();
-    yield* box.watch().map((_) => box.values.toList());
+    yield box.values.where((user) => user.liked).toList();
+    yield* box
+        .watch()
+        .map((_) => box.values.where((user) => user.liked).toList());
   }
 
   Future<GithubUser> getLikedUser(GithubUser user) async {
@@ -34,12 +39,20 @@ class UserRepository {
     }
   }
 
-  addLikedUser(GithubUser user) async {
-    if ((Hive.isBoxOpen(boxName))) {
-      return Hive.box<GithubUser>(boxName).add(user);
+  Future<void> addLikedUser(GithubUser user) async {
+    final box = Hive.isBoxOpen(boxName)
+        ? Hive.box<GithubUser>(boxName)
+        : await Hive.openBox<GithubUser>(boxName);
+
+    final existingKey = box.keys.firstWhere(
+      (key) => box.get(key)?.login == user.login,
+      orElse: () => null,
+    );
+
+    if (existingKey != null) {
+      await box.put(existingKey, user); // Update existing
     } else {
-      final box = await Hive.openBox<GithubUser>(boxName);
-      await box.add(user);
+      await box.add(user); // Add new
     }
   }
 
